@@ -70,7 +70,7 @@ export default function App() {
 
       <main className="max-w-4xl mx-auto px-4 pb-12 space-y-4">
         {formExpanded ? (
-          <SearchForm initial={params} onSearch={runSearch} />
+        <SearchForm initial={params} onSearch={runSearch} loading={loading} />
         ) : (
           <SummaryBar params={params} onEdit={() => setFormExpanded(true)} />
         )}
