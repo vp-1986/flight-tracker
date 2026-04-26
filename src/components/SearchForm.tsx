@@ -2,8 +2,9 @@ import { useState } from "react";
 import type { SearchParams } from "../api/types";
 
 interface Props {
-  initial: SearchParams;
+    initial: SearchParams;
   onSearch: (params: SearchParams) => void;
+  loading?: boolean;
 }
 
 export function SearchForm({ initial, onSearch }: Props) {
