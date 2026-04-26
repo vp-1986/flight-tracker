@@ -7,7 +7,7 @@ interface Props {
   loading?: boolean;
 }
 
-export function SearchForm({ initial, onSearch }: Props) {
+export function SearchForm({ initial, onSearch, loading = false }: Props) {
   const [form, setForm] = useState<SearchParams>(initial);
 
   const update = <K extends keyof SearchParams>(key: K, value: SearchParams[K]) =>
@@ -15,6 +15,7 @@ export function SearchForm({ initial, onSearch }: Props) {
 
   function submit(e: React.FormEvent) {
     e.preventDefault();
+    if (loading) return;
     if (!form.departureId || !form.arrivalId) return;
     onSearch(form);
   }
@@ -161,8 +162,12 @@ export function SearchForm({ initial, onSearch }: Props) {
         </div>
       </div>
 
-      <button type="submit" className="btn-primary w-full md:w-auto md:px-8">
-        Search flights
+        <button
+        type="submit"
+        disabled={loading}
+        className="btn-primary w-full md:w-auto md:px-8 disabled:opacity-50 disabled:cursor-not-allowed"
+      >
+        {loading ? "Searching…" : "Search flights"}
       </button>
     </form>
   );
